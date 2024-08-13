@@ -1,0 +1,94 @@
+* {
+    padding: 0;
+    background-color: #F4EBDC;
+    box-sizing: border-box;
+}
+
+.card {
+    justify-content:center;
+    border: 1px solid #875638;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: 250px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-container,
+.carrito-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #875638;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #E0782F;
+    color: #F4EBDC;
+    cursor: pointer;
+    align-self: center;
+}
+
+.button-trash {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    align-self: center;
+}
+
+
+.headerTitulo h1, h2{
+    text-align: center;
+    color: #875638;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.headerTitulo {
+    padding: 30px 0px;
+}
+
+.card img { 
+    width: 100%; 
+    height: auto;
+    border-radius: 5px; 
+}
+.card h3 {
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    min-height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card p {
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.total-compra {
+    margin-top: 20px; 
+    padding: 10px;
+    border-top: 2px solid #875638;
+    font-weight: bold;
+    text-align: center;
+    width: 100%; 
+}
