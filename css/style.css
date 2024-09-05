@@ -8,7 +8,6 @@ body {
 body h1 {
     display: flex;
     justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
     color: #875638;
 }
 
@@ -23,7 +22,6 @@ body h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     transition: box-shadow 0.3s ease;
 }
 
@@ -80,26 +78,28 @@ body h1 {
     background-color: #cf6a28;
 }
 
-/*Estilos input */
+/* Estilos input */
 .input-nombre-apellido,
 .input-email {
-    padding: 5px 10px;
+    padding: 15px;
     color: #875638;
     border: 1px solid #875638;
     border-radius: 5px;
-    padding: 15px;
     margin: 10px;
 }
+
 .input-nombre-apellido:hover,
 .input-email:hover {
     border-color: #E0782F;
 }
+
 .input-nombre-apellido:focus,
 .input-email:focus {
     border-color: #E0782F;
     outline: none;
     box-shadow: 0 0 5px rgba(224, 120, 47, 0.5);
 }
+
 /* Botón de eliminación */
 .button-trash {
     padding: 5px 10px;
@@ -115,7 +115,7 @@ body h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 0px;
+    padding: 30px 0;
 }
 
 .headerTitulo h1,
@@ -164,4 +164,41 @@ div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
 
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
     background-color: #ED232B;
+}
+
+/* Mediaqueries para movil*/
+@media (max-width: 320px) {
+    body {
+        font-size: 14px;
+    }
+
+    .card {
+        width: 90%;
+        margin: 5px auto;
+        padding: 10px;
+    }
+
+    .card img {
+        width: 100%;
+    }
+
+    .headerTitulo img {
+        width: 80px;
+        margin-left: 10px;
+    }
+
+    .input-nombre-apellido,
+    .input-email {
+        width: 250px;
+    }
+
+    .total-compra {
+        font-size: 14px;
+    }
+
+    .button,
+    .button-finalizar {
+        padding: 8px;
+        font-size: 14px;
+    }
 }

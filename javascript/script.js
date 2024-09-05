@@ -155,8 +155,6 @@ function vaciarCarrito() {
         }
     });
 }
-
-
 /* Renderizar el carrito en Card */
 function renderizarCarrito() {
     const carritoContainer = document.getElementById('carrito');
