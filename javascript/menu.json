@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "Hamburguesa Clásica Completa",
+    "precio": 8000,
+    "imagen": "./imagenes/hamburguesa.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Papas Fritas con cheddar y bacon",
+    "precio": 7000,
+    "imagen": "./imagenes/papasfritas.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Empanadas de Carne c/u",
+    "precio": 1700,
+    "imagen": "./imagenes/empas.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Pizza Margherita",
+    "precio": 7000,
+    "imagen": "./imagenes/pizza.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Tacos de Cerdo Marinado",
+    "precio": 8000,
+    "imagen": "./imagenes/tacos.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Ensalada César",
+    "precio": 6000,
+    "imagen": "./imagenes/ensalada.jpg"
+  }
+]

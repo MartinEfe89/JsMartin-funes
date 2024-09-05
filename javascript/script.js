@@ -1,16 +1,31 @@
 /* Array de items del menu */
+let menu = [];
 
-const menu = [
-    { id: 1, nombre: 'Hamburguesa Clásica Completa', precio: 8000, imagen: './imagenes/hamburguesa.jpg' },
-    { id: 2, nombre: 'Papas Fritas con cheddar y bacon', precio: 7000, imagen: './imagenes/papasfritas.jpg' },
-    { id: 3, nombre: 'Empanadas de Carne', precio: 1700, imagen: './imagenes/empas.jpg' },
-    { id: 4, nombre: 'Pizza Margherita', precio: 7000, imagen: './imagenes/pizza.jpg' },
-    { id: 5, nombre: 'Tacos de Cerdo Marinado', precio: 8000, imagen: './imagenes/tacos.jpg' },
-    { id: 6, nombre: 'Ensalada César', precio: 6000, imagen: './imagenes/ensalada.jpg' }
-];
+async function conseguirDatos() {
+    try {
+        const url = "./javascript/menu.json";
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Error al cargar el menú');
+        }
+        menu = await response.json();
+        renderizarMenu();
+    } catch (error) {
+        console.error('Error:', error);
+        Swal.fire({
+            title: 'Error',
+            text: 'No se pudo cargar el menú. Por favor, intente más tarde.',
+            icon: 'error',
+            background: '#F4EBDC',
+            confirmButtonColor: '#14B486',
+        });
+    }
+}
+
+/* Llamada a la función para conseguir datos del menú */
+conseguirDatos();
 
 /* Array carrito */
-
 const carrito = cargarCarrito() || [];
 
 /* Función para guardar carrito */
@@ -35,6 +50,12 @@ function agregarAlCarrito(id) {
         }
         guardarCarrito();
         renderizarCarrito();
+        // desplazamiento al final del carrito
+        const carritoContainer = document.getElementById('carrito');
+        window.scrollTo({
+            top: carritoContainer.offsetTop + carritoContainer.scrollHeight,
+            behavior: 'smooth'
+        });
     }
 }
 
@@ -52,13 +73,29 @@ function eliminarDelCarrito(id) {
     }
 }
 
-/* Funcion para calcular el total de la compra*/
+/* Función para calcular el total de la compra */
 function calcularTotal() {
     return carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
 }
 
+/* Renderizar header con título e imagen */
+function renderizarHeader() {
+    const headerContainer = document.createElement('div');
+    headerContainer.className = 'headerTitulo';
 
-/* Renderizar el menu en Card */
+    const img = document.createElement('img');
+    img.src = './imagenes/logogato.png';
+    img.alt = 'Logo de la tienda';
+
+    const h1 = document.createElement('h1');
+    h1.textContent = 'Tienda de Comidas Don Pelusa';
+
+    headerContainer.appendChild(img);
+    headerContainer.appendChild(h1);
+    document.body.prepend(headerContainer);
+}
+
+/* Renderizar el menú en Card */
 function renderizarMenu() {
     const menuContainer = document.getElementById('menu');
     menuContainer.innerHTML = '';
@@ -74,13 +111,58 @@ function renderizarMenu() {
     });
 }
 
-/* Renderizar el carrito en Card */
+/* Función para vaciar el carrito y SweetAlert con validación */
+function vaciarCarrito() {
+    const inputNombreApellido = document.querySelector('.input-nombre-apellido');
+    const inputEmail = document.querySelector('.input-email');
 
+    // Verificar si los campos están vacíos y usar Toastify
+    if (!inputNombreApellido.value.trim() || !inputEmail.value.trim()) {
+        Toastify({
+            text: "Por favor, complete los campos solicitados.",
+            duration: 3000,
+            style:{
+                background: "#E0782F",
+            },
+        }).showToast();
+        return;
+    }
+
+    // Calcular el total de la compra
+    const totalCompra = calcularTotal();
+
+    Swal.fire({
+        title: "¿Está seguro?",
+        text: `Está por finalizar su compra. El total a pagar es: $${totalCompra.toFixed(2)}`,
+        icon: "warning",
+        background: "#F4EBDC",
+        showCancelButton: true,
+        confirmButtonColor: "#14B486",
+        cancelButtonColor: "#ED232B",
+        confirmButtonText: "¡Sí, finalizar compra!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            carrito.length = 0;
+            guardarCarrito();
+            renderizarCarrito();
+            Swal.fire({
+                title: "¡Compra finalizada!",
+                text: `Gracias por utilizar nuestros servicios.`,
+                icon: "success",
+                background: "#F4EBDC",
+                confirmButtonColor: "#14B486",
+            });
+        }
+    });
+}
+
+
+/* Renderizar el carrito en Card */
 function renderizarCarrito() {
     const carritoContainer = document.getElementById('carrito');
     carritoContainer.innerHTML = '';
 
-    /*contenedor para tarjetas del carrito*/
+    /* Contenedor para tarjetas del carrito */
     const itemsContainer = document.createElement('div');
     itemsContainer.className = 'items-container';
 
@@ -92,24 +174,51 @@ function renderizarCarrito() {
             <p>Precio: $${item.precio.toFixed(2)}</p>
             <p>Cantidad: ${item.cantidad}</p>
             <p>Total: $${(item.precio * item.cantidad).toFixed(2)}</p>
-            <button class="button-trash" onclick="eliminarDelCarrito(${item.id})"><img src="./imagenes/delete-icon.svg" alt="eliminarDelCarrito"></button>
-        `;
+            <button class="button-trash" onclick="eliminarDelCarrito(${item.id})">
+                <img src="./imagenes/delete-icon.svg" alt="Eliminar del carrito">
+            </button>`;
         itemsContainer.appendChild(card);
     });
 
     carritoContainer.appendChild(itemsContainer);
 
-    /* Mostrar el total de la compra*/
-
+    /* Mostrar el total de la compra */
     const totalCompra = calcularTotal();
     const totalElement = document.createElement('div');
     totalElement.className = 'total-compra';
     totalElement.innerHTML = `<h3>Total de la compra: $${totalCompra.toFixed(2)}</h3>`;
 
+    /* Campos de entrada para nombre, apellido y email */
+    const formContainer = document.createElement('div');
+    formContainer.className = 'form-container';
+
+    const inputNombreApellido = document.createElement('input');
+    inputNombreApellido.type = 'text';
+    inputNombreApellido.placeholder = 'Nombre y Apellido';
+    inputNombreApellido.className = 'input-nombre-apellido';
+
+    const inputEmail = document.createElement('input');
+    inputEmail.type = 'email';
+    inputEmail.placeholder = 'Correo Electrónico';
+    inputEmail.className = 'input-email';
+
+    formContainer.appendChild(inputNombreApellido);
+    formContainer.appendChild(inputEmail);
+
     carritoContainer.appendChild(totalElement);
+    carritoContainer.appendChild(formContainer);
+
+    /* Botón de finalizar compra */
+    if (carrito.length > 0) {
+        const finalizarButton = document.createElement('button');
+        finalizarButton.className = 'button-finalizar';
+        finalizarButton.textContent = 'Finalizar Compra';
+        finalizarButton.onclick = vaciarCarrito;
+
+        carritoContainer.appendChild(finalizarButton);
+    }
 }
 
 // Inicializar la página
-
-renderizarMenu();
+renderizarHeader();
 renderizarCarrito();

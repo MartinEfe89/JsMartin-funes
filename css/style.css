@@ -1,70 +1,46 @@
-* {
-    padding: 0;
+/* Estilos globales */
+body {
     background-color: #F4EBDC;
-    box-sizing: border-box;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+body h1 {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #875638;
+}
+
+/* Tarjetas del menú y carrito */
 .card {
-    justify-content:center;
+    justify-content: center;
     border: 1px solid #875638;
     border-radius: 5px;
     padding: 15px;
     margin: 10px;
     width: 250px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    transition: box-shadow 0.3s ease;
 }
 
-.menu-container,
-.carrito-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    color: #875638;
-    font-family:Arial, Helvetica, sans-serif;
+.card:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    background-color: #E0782F;
-    color: #F4EBDC;
-    cursor: pointer;
-    align-self: center;
-}
-
-.button-trash {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    align-self: center;
-}
-
-
-.headerTitulo h1, h2{
-    text-align: center;
-    color: #875638;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-.headerTitulo {
-    padding: 30px 0px;
-}
-
-.card img { 
-    width: 100%; 
+.card img {
+    width: 100%;
     height: auto;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
+
 .card h3 {
     padding: 10px;
     text-align: center;
-    box-sizing: border-box;
-    min-height: 50px; 
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,23 +48,120 @@
 
 .card p {
     text-align: center;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Contenedores de menú y carrito */
+.menu-container,
+.carrito-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #875638;
+}
+
+/* Botones de acción */
+.button,
+.button-finalizar {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #E0782F;
+    color: #F4EBDC;
+    cursor: pointer;
+    align-self: center;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover,
+.button-finalizar:hover {
+    background-color: #cf6a28;
+}
+
+/*Estilos input */
+.input-nombre-apellido,
+.input-email {
+    padding: 5px 10px;
+    color: #875638;
+    border: 1px solid #875638;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+}
+.input-nombre-apellido:hover,
+.input-email:hover {
+    border-color: #E0782F;
+}
+.input-nombre-apellido:focus,
+.input-email:focus {
+    border-color: #E0782F;
+    outline: none;
+    box-shadow: 0 0 5px rgba(224, 120, 47, 0.5);
+}
+/* Botón de eliminación */
+.button-trash {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    align-self: center;
+    background-color: #F4EBDC;
+}
+
+/* Estilo del encabezado */
+.headerTitulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px;
+}
+
+.headerTitulo h1,
+h2 {
+    text-align: center;
+    color: #875638;
+}
+
+.headerTitulo img {
+    width: 100px;
+    height: auto;
+    margin-right: 15px;
+}
+
+/* Contenedor de items del carrito */
 .items-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
+/* Total de la compra */
 .total-compra {
-    margin-top: 20px; 
+    margin-top: 20px;
     padding: 10px;
     border-top: 2px solid #875638;
     font-weight: bold;
     text-align: center;
-    width: 100%; 
+    width: 100%;
+}
+
+/* SweetAlert Personalizado */
+div:where(.swal2-container) div:where(.swal2-popup) {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F4EBDC;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm),
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
+    color: #F4EBDC;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+    background-color: #14B486;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
+    background-color: #ED232B;
 }
